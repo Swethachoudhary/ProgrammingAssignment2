@@ -1,0 +1,29 @@
+makecachematrix<-function(s=matrix()){
+  inv<-NULL
+  set<-function(p){
+    s<<-p
+    inv<<-NULL
+  }
+  get <-function(){s}
+  setinv<-function(inverse)inv<<-inverse
+  getinv<-function() {
+    list(set=set, get=get, setinv = setinv,getinv = getinv)
+    
+  }
+  
+  cachesolve<-function(s, ...){
+    inv<-s$Inverse()
+    if(!is.null(inv)){
+      message("getting cached data")
+      return(inv)
+    }
+    mat<-s$get()
+    inv<-solve(mat,...)
+    s$setInverse(inv)
+    inv
+  }
+  
+  "p<-makecachematrix(matrix(1:8,2,4)"
+  p$get()
+  pgetinv()
+  
